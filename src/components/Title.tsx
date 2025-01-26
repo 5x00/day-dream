@@ -7,20 +7,65 @@ function Title () {
     const lineRef = useRef<HTMLDivElement>(null);
     const animationRef = useRef<gsap.core.Tween | null>(null);
     const imageBoxRef = useRef<HTMLDivElement>(null);
-    const [imageBox, setImageBox] = useState<{ visible: boolean; x: number; y: number; image: string }>({
+    const [imageBox, setImageBox] = useState<{ visible: boolean; x: number; y: number; image: string; rotation: number }>({
       visible: false,
       x: 0,
       y: 0,
       image: "",
+      rotation: 0,
     });
 
     const imagePaths = Array.from({ length: 10 }, (_, i) => `/src/assets/${i + 1}.jpg`);
+
+    // Track target and current position for inertia
+    const targetPosition = useRef({ x: 0, y: 0 });
+    const currentPosition = useRef({ x: 0, y: 0 });
+    const currentRotation = useRef(0); 
+    const [scale, setScale] = useState(1); 
+
     useEffect(() => {
         imagePaths.forEach((path) => {
           const img = new Image();
           img.src = path;
         });
-      }, []);
+    }, []);
+
+    useEffect(() => {
+        let animationFrame: number;
+    
+        const updatePosition = () => {
+          // Lerp toward the target position
+          const lerpFactor = 0.125; // Adjust for faster/slower movement
+          currentPosition.current.x += (targetPosition.current.x - currentPosition.current.x) * lerpFactor;
+          currentPosition.current.y += (targetPosition.current.y - currentPosition.current.y) * lerpFactor;
+          
+          // Calculate rotation based on movement direction
+            const dx = targetPosition.current.x - currentPosition.current.x;
+            const dy = targetPosition.current.y - currentPosition.current.y;
+            const maxRotation = 10; // Maximum rotation in degrees
+            const rotation = Math.min(Math.max(dx * 0.05, -maxRotation), maxRotation); // Scale rotation by horizontal movement
+
+            // Smoothly update rotation
+            currentRotation.current += (rotation - currentRotation.current) * lerpFactor;
+    
+          // Update the image box position
+          setImageBox((prev) => ({
+            ...prev,
+            x: currentPosition.current.x,
+            y: currentPosition.current.y,
+            rotation: currentRotation.current,
+          }));
+    
+          // Continue the animation
+          animationFrame = requestAnimationFrame(updatePosition);
+        };
+    
+        // Start the animation loop
+        animationFrame = requestAnimationFrame(updatePosition);
+    
+        // Cleanup on unmount
+        return () => cancelAnimationFrame(animationFrame);
+    }, []);
 
     useEffect(() => {
         // Initialize the animation using fromTo
@@ -42,15 +87,33 @@ function Title () {
         }
     }, []);
     
+    useEffect(() => {
+        if (!imageBox.image) return;
+    
+        // Set scale to smaller value and then animate back to 1
+        setScale(0.95);
+        const timeout = setTimeout(() => {
+          setScale(1);
+        }, 40); // Duration of the pop effect (150ms)
+    
+        return () => clearTimeout(timeout);
+      }, [imageBox.image]);
 
     const handleMouseEnter = () => {
         animationRef.current?.play();
         setImageBox((prev) => ({ ...prev, visible: true }));
+        setScale(0.8); // Start from a small scale
+        setTimeout(() => {
+        setScale(1); // Scale up to normal size for the pop-in effect
+        }, 40);
     };
     
     const handleMouseLeave = () => {
         animationRef.current?.reverse();
-        setImageBox((prev) => ({ ...prev, visible: false })); 
+        setScale(0.8); // Scale down to create the pop-out effect
+        setTimeout(() => {
+        setImageBox((prev) => ({ ...prev, visible: false })); // Hide the image box after the scale down is complete
+        }, 40); // Delay to allow the pop-out effect to complete 
     };
 
     const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -66,13 +129,14 @@ function Title () {
     
         // Set the image box position and image
         const boxSize = 450;
-        setImageBox({
-            visible: true,
-            x: e.clientX + 20, // 20px horizontally offset from the cursor
-            y: e.clientY - boxSize/2, // Vertically centered: subtract half of the image box height (150px / 2 = 75px)
-            image: imagePaths[imageIndex], // Dynamic image path
-        });
-        console.log(imageBox);
+        targetPosition.current = {
+            x: e.clientX + boxSize/2, // 20px horizontally offset from the cursor
+            y: e.clientY, // Vertically centered
+        };
+        setImageBox((prev) => ({
+            ...prev,
+            image: imagePaths[imageIndex],
+        }));
     };
 
     return (
@@ -97,8 +161,9 @@ function Title () {
                         backgroundImage: `url(${imageBox.image})`,
                         backgroundSize: "cover",
                         backgroundPosition: "center",
-                        border: "2px solid #fff",
                         pointerEvents: "none", 
+                        transform: `translate(-50%, -50%) rotate(${imageBox.rotation}deg) scale(${scale})`,
+                        transition: "transform 0.1s ease",
                     }}
                     ></div>
                 )}
