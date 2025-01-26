@@ -1,0 +1,40 @@
+.centered-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100vh; /* Full vertical height */
+    width: 90%; /* Full width of the page */
+    box-sizing: border-box; /* Include padding in width calculation */
+  }
+  
+  .left-text,
+  .right-text {
+    font-size: 120px;
+    font-weight: 800;
+    font-family: forma-djr-display, sans-serif;
+    font-style: italic;
+    color: #f7f7f7;
+  }
+  
+  .line {
+    flex-grow: 1; /* Allow the line to grow and take up available space */
+    height: 5px; /* Thickness of the line */
+    background: #f7f7f7; /* Line color */
+    margin: 0 20px; /* Space between the line and the text */
+    margin-top: 30px;
+    transition: all 0.5s ease-in-out;
+  }
+
+  .line:hover {
+    height: 50px; /* Thickness on hover */
+    background: linear-gradient(90deg, #ffffff, #ff6a00, #ff49a1); /* Gradient color */
+  }
+  
+  .outer-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full vertical height */
+    width: 100%; /* Full width of the page */
+    box-sizing: border-box; /* Ensure padding/margin is included in dimensions */
+  }
