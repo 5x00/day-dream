@@ -1,0 +1,87 @@
+/* Outer container: full-width footer */
+.footer-outer {
+    flex-shrink: 0;
+    width: 100%;
+    background: #000; /* Background color */
+    color: #f7f7f7; /* Text color */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 0;
+    box-sizing: border-box;
+  }
+  
+  /* Inner container: 90% width */
+  .footer-inner {
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+  }
+  
+  /* Left section: Asterix and text */
+  .footer-left {
+    display: flex;
+    align-items: center; /* Align asterisk and text vertically */
+    gap: 10px; /* Space between the asterisk and the text */
+  }
+  
+  .asterix {
+    font-size: 40px; /* Large asterisk */
+    font-weight: 700;
+    font-family: forma-djr-display, sans-serif;
+    font-style: normal;
+    line-height: 1; /* Prevent extra spacing */
+    display: flex; /* Ensure consistent alignment in flexbox */
+    align-items: center; /* Vertically center within the flexbox */
+  }
+  
+  .footer-text {
+    font-size: 16px;
+    line-height: 1.6;
+    font-family: forma-djr-display, sans-serif;
+    width: 60%;
+  }
+  
+  /* Right section: Button */
+  .footer-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  
+  .footer-button {
+    background: none; /* No background */
+    color: #ffffff; /* White text color */
+    font-size: 24px; /* Large asterisk */
+    font-weight: 500;
+    font-family: forma-djr-display, sans-serif;
+    font-style: normal;
+    border: none; /* No border */
+    cursor: pointer; /* Pointer cursor for interactivity */
+    display: inline-flex; /* Align text and icon inline */
+    align-items: center;
+    gap: 10px; /* Space between text and icon */
+    transition: all 0.3s ease; /* Smooth transition for color and hover effect */
+    padding: 0; /* Remove padding */
+    text-decoration: none; /* No underline */
+  }
+  
+  .footer-button:hover {
+    background: none; /* No background */
+    color: #ff6a00; /* Text color changes to match the gradient */
+  }
+  
+  .footer-icon {
+    width: 20px;
+    height: 20px;
+    stroke: currentColor; /* Icon color matches text */
+    transition: all 0.3s ease; /* Smooth transition for hover effect */
+  }
+  
+  .footer-button:hover .footer-icon {
+    stroke: #ff6a00; /* Change icon color on hover */
+  }
+  
+  

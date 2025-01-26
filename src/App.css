@@ -2,7 +2,11 @@ body {
   margin: 0;
   padding: 0;
   background: #000;
-  min-height: 100vh;
-  overflow: hidden;
-  align-items: center;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Full viewport height */
+  overflow: hidden; /* Disable scrolling */
 }
