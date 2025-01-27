@@ -4,18 +4,20 @@ import { gsap } from "gsap";
 
 function Home_Title () {
 
+    const isSafari =
+    /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
     const lineRef = useRef<HTMLDivElement>(null);
     const animationRef = useRef<gsap.core.Tween | null>(null);
-    const [imageBox, setImageBox] = useState<{ visible: boolean; x: number; y: number; imageIndex: number; rotation: number; scale: number }>({
+    const [imageBox, setImageBox] = useState<{ visible: boolean; x: number; y: number; imageIndex: number; rotation: number }>({
       visible: false,
       x: 0,
       y: 0,
       imageIndex: 0,
       rotation: 0,
-      scale: 1,
     });
 
-    const imagePaths = Array.from({ length: 10 }, (_, i) => `/src/assets/${i + 1}.jpg`);
+    const imagePaths = Array.from({ length: 10 }, (_, i) => `/images/${i + 1}.jpg`);
 
     // Track target and current position for inertia
     const targetPosition = useRef({ x: 0, y: 0 });
@@ -32,21 +34,31 @@ function Home_Title () {
 
     useEffect(() => {
         let animationFrame: number;
+        let intervalId: number;
     
         const updatePosition = () => {
           // Lerp toward the target position
-          const lerpFactor = 0.125; // Adjust for faster/slower movement
-          currentPosition.current.x += (targetPosition.current.x - currentPosition.current.x) * lerpFactor;
-          currentPosition.current.y += (targetPosition.current.y - currentPosition.current.y) * lerpFactor;
+          const lerpFactor = 0.1; // Adjust for faster/slower movement
+          const newX =
+            currentPosition.current.x +
+            (targetPosition.current.x - currentPosition.current.x) * lerpFactor;
+          const newY =
+            currentPosition.current.y +
+            (targetPosition.current.y - currentPosition.current.y) * lerpFactor;
+
+          currentPosition.current.x = parseFloat(newX.toFixed(2));
+          currentPosition.current.y = parseFloat(newY.toFixed(2));
           
           // Calculate rotation based on movement direction
             const dx = targetPosition.current.x - currentPosition.current.x;
-            const dy = targetPosition.current.y - currentPosition.current.y;
             const maxRotation = 10; // Maximum rotation in degrees
             const rotation = Math.min(Math.max(dx * 0.05, -maxRotation), maxRotation); // Scale rotation by horizontal movement
 
             // Smoothly update rotation
-            currentRotation.current += (rotation - currentRotation.current) * lerpFactor;
+            const newRotation =
+              currentRotation.current +
+              (rotation - currentRotation.current) * lerpFactor;
+            currentRotation.current = parseFloat(newRotation.toFixed(3));
     
           // Update the image box position
           setImageBox((prev) => ({
@@ -57,14 +69,26 @@ function Home_Title () {
           }));
     
           // Continue the animation
-          animationFrame = requestAnimationFrame(updatePosition);
+          if (!isSafari) {
+            animationFrame = requestAnimationFrame(updatePosition);
+          }
         };
     
         // Start the animation loop
-        animationFrame = requestAnimationFrame(updatePosition);
+        if (isSafari) {
+          intervalId = setInterval(updatePosition, 16); // Approximately 60fps
+        } else {
+          animationFrame = requestAnimationFrame(updatePosition);
+        }
     
         // Cleanup on unmount
-        return () => cancelAnimationFrame(animationFrame);
+        return () => {
+          if (isSafari) {
+            clearInterval(intervalId);
+          } else {
+            cancelAnimationFrame(animationFrame);
+          }
+        }
     }, []);
 
     useEffect(() => {
@@ -89,38 +113,31 @@ function Home_Title () {
 
     //Squeeze effect
     useEffect(() => {
-        if (imageBox.visible) {
-          setImageBox((prev) => ({
-            ...prev,
-            scale: 0.9, // Squeeze effect: reduce scale
-          }));
-    
-          const timeout = setTimeout(() => {
-            setImageBox((prev) => ({
-              ...prev,
-              scale: 1, // Restore scale
-            }));
-          }, 100); // Squeeze effect duration: 0.1s
-    
-          return () => clearTimeout(timeout); // Cleanup timeout
-        }
-      }, [imageBox.imageIndex]);
+      if (imageBox.visible) {
+        setScale(0.98)
+        const timeout = setTimeout(() => {
+          setScale(1)
+        }, 40); // Squeeze effect duration: 0.1s
+  
+        return () => clearTimeout(timeout); // Cleanup timeout
+      }
+    }, [imageBox.imageIndex]);
 
     const handleMouseEnter = () => {
-        animationRef.current?.play();
-        setImageBox((prev) => ({ ...prev, visible: true }));
-        setScale(0.8); // Start from a small scale
-        setTimeout(() => {
-        setScale(1); // Scale up to normal size for the pop-in effect
-        }, 40);
+      animationRef.current?.play();
+      setImageBox((prev) => ({ ...prev, visible: true }));
+      setScale(0.8); // Start from a small scale
+      setTimeout(() => {
+        setScale(1);
+      }, 40);
     };
     
     const handleMouseLeave = () => {
-        animationRef.current?.reverse();
-        setScale(0.8); // Scale down to create the pop-out effect
-        setTimeout(() => {
-        setImageBox((prev) => ({ ...prev, visible: false })); // Hide the image box after the scale down is complete
-        }, 40); // Delay to allow the pop-out effect to complete 
+      animationRef.current?.reverse();
+      setScale(0.9); // Slightly smaller scale for the pop-out effect
+      setTimeout(() => {
+        setImageBox((prev) => ({ ...prev, visible: false }));
+      }, 40); // Match this delay with the CSS transition duration
     };
 
     const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -138,7 +155,7 @@ function Home_Title () {
         const boxSize = 450;
         targetPosition.current = {
             x: e.clientX + boxSize/2, // 20px horizontally offset from the cursor
-            y: e.clientY, // Vertically centered
+            y: e.clientY - boxSize/4, // Vertically centered
         };
         setImageBox((prev) => ({
             ...prev,
@@ -168,9 +185,9 @@ function Home_Title () {
                         backgroundSize: "cover",
                         backgroundPosition: "center",
                         pointerEvents: "none", 
-                        transform: `translate(-50%, -50%) rotate(${imageBox.rotation}deg) scale(${imageBox.scale})`,
-                        transition: "transform 0.2s ease",
-                        zIndex: 9999,
+                        transform: `translate(-50%, -50%) rotate(${imageBox.rotation}deg) scale(${scale})`,
+                        willChange: "transform",
+                        backfaceVisibility: "hidden",
                     }}
                     >
                     {imagePaths.map((path, index) => (

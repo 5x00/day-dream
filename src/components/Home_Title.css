@@ -6,7 +6,6 @@
     align-items: center;
     width: 100%; /* Full width */
     height: 100%;
-    z-index: 9999;
 }
   
   .centered-container {

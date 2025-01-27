@@ -1,5 +1,3 @@
-import React from "react";
-
 function ConnectPage() {
   return (
     <div style={{ textAlign: "center", padding: "50px" }}>

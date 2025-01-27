@@ -1,4 +1,3 @@
-import React from "react";
 import "./Creator_Footer.css"; 
 
 function Creator_Footer () {

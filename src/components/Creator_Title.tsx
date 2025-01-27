@@ -16,7 +16,7 @@ function Creator_Title () {
       images[Math.floor(Math.random() * images.length)];
 
     // Set the background image
-    setBackgroundImage(`/src/assets/${randomImage}`); // Adjust the path as needed
+    setBackgroundImage(`/images/${randomImage}`); // Adjust the path as needed
     }, []);
 
     return (
