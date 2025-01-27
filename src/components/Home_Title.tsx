@@ -1,18 +1,18 @@
-import "./Title.css";
+import "./Home_Title.css";
 import { useRef, useEffect, useState } from "react";
 import { gsap } from "gsap";
 
-function Title () {
+function Home_Title () {
 
     const lineRef = useRef<HTMLDivElement>(null);
     const animationRef = useRef<gsap.core.Tween | null>(null);
-    const imageBoxRef = useRef<HTMLDivElement>(null);
-    const [imageBox, setImageBox] = useState<{ visible: boolean; x: number; y: number; image: string; rotation: number }>({
+    const [imageBox, setImageBox] = useState<{ visible: boolean; x: number; y: number; imageIndex: number; rotation: number; scale: number }>({
       visible: false,
       x: 0,
       y: 0,
-      image: "",
+      imageIndex: 0,
       rotation: 0,
+      scale: 1,
     });
 
     const imagePaths = Array.from({ length: 10 }, (_, i) => `/src/assets/${i + 1}.jpg`);
@@ -77,7 +77,7 @@ function Title () {
               background: "linear-gradient(90deg, #ffffff, #ffffff, #ffffff)", // Ensure starting color is white
             },
             { // To (hover effect state)
-              height: 50,
+              height: 75,
               background: "linear-gradient(90deg, #ffffff, #ff6a00, #ff49a1)", // Gradient background
               duration: 0.3,
               ease: "power1.inOut",
@@ -86,18 +86,25 @@ function Title () {
           );
         }
     }, []);
-    
+
+    //Squeeze effect
     useEffect(() => {
-        if (!imageBox.image) return;
+        if (imageBox.visible) {
+          setImageBox((prev) => ({
+            ...prev,
+            scale: 0.9, // Squeeze effect: reduce scale
+          }));
     
-        // Set scale to smaller value and then animate back to 1
-        setScale(0.95);
-        const timeout = setTimeout(() => {
-          setScale(1);
-        }, 40); // Duration of the pop effect (150ms)
+          const timeout = setTimeout(() => {
+            setImageBox((prev) => ({
+              ...prev,
+              scale: 1, // Restore scale
+            }));
+          }, 100); // Squeeze effect duration: 0.1s
     
-        return () => clearTimeout(timeout);
-      }, [imageBox.image]);
+          return () => clearTimeout(timeout); // Cleanup timeout
+        }
+      }, [imageBox.imageIndex]);
 
     const handleMouseEnter = () => {
         animationRef.current?.play();
@@ -135,7 +142,7 @@ function Title () {
         };
         setImageBox((prev) => ({
             ...prev,
-            image: imagePaths[imageIndex],
+            imageIndex,
         }));
     };
 
@@ -151,21 +158,37 @@ function Title () {
                     onMouseMove={handleMouseMove}
                 ></div>
                 {imageBox.visible && (
-                    <div ref={imageBoxRef}
+                    <div
                     style={{
                         position: "absolute",
                         top: imageBox.y,
                         left: imageBox.x,
                         width: "450px",
                         height: "450px",
-                        backgroundImage: `url(${imageBox.image})`,
                         backgroundSize: "cover",
                         backgroundPosition: "center",
                         pointerEvents: "none", 
-                        transform: `translate(-50%, -50%) rotate(${imageBox.rotation}deg) scale(${scale})`,
-                        transition: "transform 0.1s ease",
+                        transform: `translate(-50%, -50%) rotate(${imageBox.rotation}deg) scale(${imageBox.scale})`,
+                        transition: "transform 0.2s ease",
+                        zIndex: 9999,
                     }}
-                    ></div>
+                    >
+                    {imagePaths.map((path, index) => (
+                        <img
+                            key={index}
+                            src={path}
+                            alt={`Image ${index}`}
+                            style={{
+                            position: "absolute",
+                            top: 0,
+                            left: 0,
+                            width: "100%",
+                            height: "100%",
+                            opacity: index === imageBox.imageIndex ? 1 : 0, // Only show the current image
+                            }}
+                        />
+                    ))}
+                    </div>
                 )}
                 <span className="right-text">dream</span>
             </div>
@@ -173,4 +196,4 @@ function Title () {
     );
 };
 
-export default Title;
+export default Home_Title;

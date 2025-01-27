@@ -2,6 +2,11 @@ body {
   margin: 0;
   padding: 0;
   background: #000;
+  height: 100vh;
+}
+
+html {
+  height: 100%; /* Ensure html takes full viewport height */
 }
 
 .app-container {

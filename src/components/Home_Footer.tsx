@@ -1,6 +1,6 @@
-import "./Footer.css";
+import "./Home_Footer.css";
 
-function Footer() {
+function Home_Footer() {
   return (
     <footer className="footer-outer">
       <div className="footer-inner">
@@ -16,16 +16,16 @@ function Footer() {
           <button className="footer-button">
             Let’s talk
             <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="footer-icon"
-            >
-              <path d="M5 12h14M12 5l7 7-7 7" />
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="3"
+                strokeLinecap="square"
+                strokeLinejoin="miter"
+                className="footer-icon"
+                >
+                <path d="M5 19L19 5M5 5h14v14" />
             </svg>
           </button>
         </div>
@@ -34,4 +34,4 @@ function Footer() {
   );
 };
 
-export default Footer;
+export default Home_Footer;

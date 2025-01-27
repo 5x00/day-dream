@@ -2,7 +2,6 @@
 .footer-outer {
     flex-shrink: 0;
     width: 100%;
-    background: #000; /* Background color */
     color: #f7f7f7; /* Text color */
     display: flex;
     justify-content: center;
@@ -38,8 +37,9 @@
   }
   
   .footer-text {
-    font-size: 16px;
-    line-height: 1.6;
+    font-size: 18px;
+    line-height: 1;
+    letter-spacing: 1px;
     font-family: forma-djr-display, sans-serif;
     font-weight: 500;
     width: 60%;
@@ -50,6 +50,7 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    min-width: 10%;
   }
   
   .footer-button {
@@ -75,8 +76,8 @@
   }
   
   .footer-icon {
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
     stroke: currentColor; /* Icon color matches text */
     transition: all 0.3s ease; /* Smooth transition for hover effect */
   }

@@ -1,0 +1,31 @@
+.outer-container {
+    position: relative;
+    width: 100%;
+    height: 100%; /* Adjust height as needed */
+    overflow: hidden;
+  }
+  
+  .inner-container {
+    position: absolute;
+    width: 90%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: cover; /* Ensure the image covers the entire container */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat;
+  }
+  
+  /* Text styling for "creator" */
+  .creator-text {
+    font-size: 10vw; /* Dynamic font size relative to viewport width */
+    font-weight: 700; /* Bold text */
+    font-family: forma-djr-display, sans-serif;
+    font-style: italic;
+    color: #f7f7f7;
+    margin: 0; /* Remove default margin */
+    line-height: 1; /* Adjust line height */
+    text-shadow: 12px 12px 14px rgba(0, 0, 0, 0.2); 
+  }
+  
