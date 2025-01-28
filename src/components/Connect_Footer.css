@@ -1,0 +1,46 @@
+/* connect-footer container styles */
+.connect-footer {
+  width: 100%;
+  justify-content: center;
+  display: flex;
+  font-size: 20px; /* Large asterisk */
+  font-weight: 500;
+  font-family: forma-djr-display, sans-serif;
+  font-style: normal;
+  letter-spacing: 1px;
+  padding: 40px 0px;
+}
+
+.connect-footer-inner {
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #f7f7f7; /* connect-footer text color */
+}
+
+/* Left section styles */
+.connect-footer-left {
+  display: flex;
+  gap: 20px; /* Space between links */
+}
+
+/* External link styles */
+.connect-footer-link {
+  color: #f7f7f7; /* Link color */
+  text-decoration: none; /* Remove underline */
+  transition: color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.connect-footer-link:hover {
+  color: #ff6a00; /* Highlight color on hover */
+}
+
+/* Right section styles */
+.connect-footer-right {
+  text-align: right;
+}
+
+.connect-footer-right p {
+  margin: 0; /* Remove default margin */
+}

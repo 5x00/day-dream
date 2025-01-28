@@ -1,10 +1,16 @@
+import "./App.css";
+import Header from "./Header";
+import Connect_Footer from "./components/Connect_Footer";
+import Connect from "./components/Connect";
+
 function ConnectPage() {
   return (
-    <div style={{ textAlign: "center", padding: "50px" }}>
-      <h1>Empty Page</h1>
-      <p>This is a placeholder page. Add content here!</p>
+    <div className="app-container">
+      <Header />
+      <Connect />
+      <Connect_Footer />
     </div>
   );
-};
+}
 
 export default ConnectPage;

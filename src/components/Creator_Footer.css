@@ -1,116 +1,116 @@
 /* Footer styles */
 .footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    color: #f7f7f7;
-    width: 90%;
-    font-family: forma-djr-display, sans-serif;
-    padding: 20px 0px;
-    align-self: center;
-  }
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  color: #f7f7f7;
+  width: 90%;
+  font-family: forma-djr-display, sans-serif;
+  padding: 40px 0px;
+  align-self: center;
+  margin-top: 20px;
+}
 
-  .text-section {
-    max-width: 50%;
-  }
+.text-section {
+  max-width: 50%;
+}
 
-  .callback-container {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px; /* Adjust spacing between link and text */
-  }
+.callback-container {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px; /* Adjust spacing between link and text */
+}
 
-  .text-section p {
-    font-weight: 500;
-    font-size: 16px;
-    font-style: normal;
-    letter-spacing: 1px;
-  }
-  
-  .nav-link {
-    position: relative;
-    text-decoration: none;
-    font-size: 16px;
-    font-weight: 500;
-    font-family: forma-djr-display, sans-serif;
-    font-style: normal;
-    color: #f7f7f7;
-    transition: color 0.3s;
-    padding-bottom: 2px;
-  }
-  
-  .nav-link:hover {
-    color: #f7f7f7;
-  }
-  
-  .nav-link::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 3px;
-    background: linear-gradient(90deg, #ffffff, #ff6a00, #ff49a1);
-    transition: width 0.3s ease;
-  }
-  
-  .nav-link:hover::after {
-    width: 100%;
-  }
-  
-  .login-container {
-    max-width: 25%;
-    width: 100%;
-    font-family: forma-djr-display, sans-serif;
-  }
-  
-  .login-form {
-    display: flex;
-    flex-direction: column;
-    gap:10px;
-  }
-  
-  .input-container {
-    margin-bottom: 20px;
-    position: relative;
-  }
-  
-  .input-container input {
-    border: none;
-    border-bottom: 2px solid #f7f7f7;
-    background: transparent;
-    color: #f7f7f7;
-    font-size: 16px;
-    width: 100%;
-    padding: 5px 0;
-    outline: none;
-  }
-  
-  .input-container label {
-    font-size: 13px;
-    color: #f7f7f7;
-    position: absolute;
-    top: 40px;
-    left: 0;
-  }
-  
-  .login-button {
-    background: none; /* No background */
-    color: #ffffff; /* White text color */
-    font-size: 24px; /* Large asterisk */
-    font-weight: 700;
-    font-family: forma-djr-display, sans-serif;
-    font-style: italic;
-    border: none; /* No border */
-    cursor: pointer; /* Pointer cursor for interactivity */
-    text-align: right;
-    transition: all 0.3s ease; /* Smooth transition for color and hover effect */
-    padding: 0; /* Remove padding */
-    text-decoration: none; /* No underline */
-  }
-  
-  .login-button:hover {
-    background: none; /* No background */
-    color: #ff6a00; /* Text color changes to match the gradient */
-  }
-  
+.text-section p {
+  font-weight: 500;
+  font-size: 21px;
+  font-style: normal;
+  letter-spacing: 1px;
+}
+
+.nav-link {
+  position: relative;
+  text-decoration: none;
+  font-size: 21px;
+  font-weight: 500;
+  font-family: forma-djr-display, sans-serif;
+  font-style: normal;
+  color: #f7f7f7;
+  transition: color 0.3s;
+  padding-bottom: 2px;
+}
+
+.nav-link:hover {
+  color: #f7f7f7;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #ffffff, #ff6a00, #ff49a1);
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+.login-container {
+  max-width: 20%;
+  width: 100%;
+  font-family: forma-djr-display, sans-serif;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.input-container {
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.input-container input {
+  border: none;
+  border-bottom: 2px solid #f7f7f7;
+  background: transparent;
+  color: #f7f7f7;
+  font-size: 20px;
+  width: 100%;
+  padding: 5px 0;
+  outline: none;
+}
+
+.input-container label {
+  font-size: 18px;
+  color: #f7f7f7;
+  position: absolute;
+  top: 40px;
+  left: 0;
+}
+
+.login-button {
+  background: none; /* No background */
+  color: #ffffff; /* White text color */
+  font-size: 24px; /* Large asterisk */
+  font-weight: 700;
+  font-family: forma-djr-display, sans-serif;
+  font-style: italic;
+  border: none; /* No border */
+  cursor: pointer; /* Pointer cursor for interactivity */
+  text-align: right;
+  transition: all 0.3s ease; /* Smooth transition for color and hover effect */
+  padding: 0; /* Remove padding */
+  text-decoration: none; /* No underline */
+}
+
+.login-button:hover {
+  background: none; /* No background */
+  color: #ff6a00; /* Text color changes to match the gradient */
+}

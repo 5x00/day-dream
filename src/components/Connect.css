@@ -1,0 +1,56 @@
+/* Outer container: takes up 100% width */
+.connect-container {
+  width: 100%;
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+  align-items: center;
+  background: #000; /* Optional background color */
+  font-size: 36px; /* Dynamic font size relative to viewport width */
+  font-weight: 700; /* Bold text */
+  font-family: forma-djr-display, sans-serif;
+  font-style: italic;
+  line-height: 1;
+}
+
+/* Inner container: 90% width, centered */
+.connect-inner {
+  width: 90%; /* Optional max width for larger screens */
+  text-align: left; /* Align text to the left */
+}
+
+/* Text content: left-aligned with max width 80% */
+.text-connect {
+  max-width: 80%;
+}
+
+.text-connect p {
+  color: #f7f7f7;
+}
+
+/* Book a Call button */
+.book-call {
+  position: relative;
+  color: #f7f7f7;
+  text-decoration: none; /* Remove underline from links */
+  transition: color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.book-call:hover {
+  color: #f7f7f7;
+}
+
+.book-call::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #ffffff, #ff6a00, #ff49a1);
+  transition: width 0.3s ease;
+}
+
+.book-call:hover::after {
+  width: 100%;
+}

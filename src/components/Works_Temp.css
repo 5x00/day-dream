@@ -1,0 +1,27 @@
+/* Outer container: takes up 100% width and height, centers the inner container */
+.works-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  overflow: visible;
+  margin-top: 5%;
+  z-index: -1;
+}
+
+/* Inner container: takes up 90% width and optionally scales height */
+.works {
+  height: 100vh;
+  width: 90%; /* 90% of the parent's width */
+  position: relative;
+}
+
+/* Images: Positioned absolutely inside the inner container */
+.works img {
+  position: absolute;
+  width: 40vmin; /* Fixed width */
+  height: 40vmin; /* Fixed height */
+  object-fit: cover; /* Maintain aspect ratio and cover the image container */
+}
