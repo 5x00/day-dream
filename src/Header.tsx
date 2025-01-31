@@ -33,6 +33,13 @@ function Header() {
             works
           </Link>
           <Link
+            to="/solutions"
+            className="nav-links"
+            onClick={() => setMenuOpen(false)}
+          >
+            solutions
+          </Link>
+          <Link
             to="/connect"
             className="nav-links"
             onClick={() => setMenuOpen(false)}

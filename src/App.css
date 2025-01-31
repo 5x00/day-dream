@@ -2,11 +2,14 @@ body {
   margin: 0;
   padding: 0;
   background: #000;
-  height: 100vh;
 }
 
 html {
-  height: 100%;
+  scrollbar-width: none;
+}
+
+body::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
 }
 
 .app-container {
@@ -14,4 +17,8 @@ html {
   flex-direction: column;
   height: 100vh; /* Full viewport height */
   overflow: hidden; /* Disable scrolling */
+}
+
+.main-content {
+  flex-grow: 1; /* Fills the remaining vertical space */
 }

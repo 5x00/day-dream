@@ -121,13 +121,11 @@ function Home_Title() {
         lineRef.current,
         {
           // From (starting state)
-          height: 5,
-          background: "linear-gradient(90deg, #ffffff, #ffffff, #ffffff)", // Ensure starting color is white
+          height: 10,
         },
         {
           // To (hover effect state)
           height: 75,
-          background: "linear-gradient(90deg, #ffffff, #ff6a00, #ff49a1)", // Gradient background
           duration: 0.3,
           ease: "power1.inOut",
           paused: true, // Paused initially
@@ -188,8 +186,8 @@ function Home_Title() {
     // Set the image box position and image
     const boxSize = 450;
     targetPosition.current = {
-      x: e.clientX + boxSize / 2, // 20px horizontally offset from the cursor
-      y: e.clientY - boxSize / 4, // Vertically centered
+      x: e.clientX + boxSize / 4,
+      y: e.clientY - boxSize / 4,
     };
     setImageBox((prev) => ({
       ...prev,
@@ -200,7 +198,7 @@ function Home_Title() {
   return (
     <div className="home-container">
       <div className="home">
-        <span className="left-text">day</span>
+        <span className="left-text">AI Powered</span>
         <div
           className="line"
           ref={lineRef}
@@ -241,7 +239,7 @@ function Home_Title() {
             ))}
           </div>
         )}
-        <span className="right-text">dream</span>
+        <span className="right-text">Human Lead</span>
       </div>
     </div>
   );

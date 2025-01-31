@@ -6,10 +6,9 @@
   justify-content: center;
   align-items: center;
   background: #000; /* Optional background color */
-  font-size: 36px; /* Dynamic font size relative to viewport width */
-  font-weight: 700; /* Bold text */
+  font-size: 64px; /* Dynamic font size relative to viewport width */
+  font-weight: 500; /* Bold text */
   font-family: forma-djr-display, sans-serif;
-  font-style: italic;
   line-height: 1;
 }
 
@@ -21,7 +20,8 @@
 
 /* Text content: left-aligned with max width 80% */
 .text-connect {
-  max-width: 80%;
+  max-width: 90%;
+  font-style: normal;
 }
 
 .text-connect p {
@@ -34,6 +34,7 @@
   color: #f7f7f7;
   text-decoration: none; /* Remove underline from links */
   transition: color 0.3s ease; /* Smooth transition for hover effect */
+  font-style: italic;
 }
 
 .book-call:hover {

@@ -1,0 +1,31 @@
+.loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: black; /* Adjust background color */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  height: 100%;
+}
+
+.loading-home {
+  position: relative;
+  width: 100%;
+}
+
+.loading-line {
+  position: absolute;
+  height: 5px;
+  background: linear-gradient(90deg, #ffffff, #ff6a00, #ff49a1);
+}

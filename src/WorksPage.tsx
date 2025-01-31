@@ -1,5 +1,4 @@
 import "./App.css";
-import Header from "./Header";
 import Works_Temp from "./components/Works_Temp";
 import { useEffect } from "react";
 
@@ -17,10 +16,9 @@ function WorksPage() {
   }, []);
 
   return (
-    <div className="app-container">
-      <Header />
+    <>
       <Works_Temp />
-    </div>
+    </>
   );
 }
 

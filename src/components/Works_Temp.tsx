@@ -68,6 +68,9 @@ function Creator_Title() {
   return (
     <div className="works-container">
       <div className="works">
+        <div className="works-overlay">
+          <h1>we’re still working on setting up this page :/</h1>
+        </div>
         {imageList.map((src, index) => {
           const { top, left, offsetX, offsetY } = positions[index];
           return (
