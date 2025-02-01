@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Home_Title from "./components/Home_Title";
 import Home_Footer from "./components/Home_Footer";
+import "./App.css";
 
 function Homepage() {
   const [parallax, setParallax] = useState({ x: 0, y: 0 });
@@ -34,7 +35,7 @@ function Homepage() {
 
   return (
     <>
-      <div className="app-container" onMouseMove={handleMouseMove}>
+      <div className="main-container" onMouseMove={handleMouseMove}>
         <svg
           width="100%"
           height="100%"

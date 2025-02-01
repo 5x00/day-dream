@@ -19,6 +19,35 @@ body::-webkit-scrollbar {
   overflow: hidden; /* Disable scrolling */
 }
 
-.main-content {
-  flex-grow: 1; /* Fills the remaining vertical space */
+.main-container {
+  flex-grow: 1; /* Fills available space left by the header */
+  display: flex; /* Use flex if you plan to layout children with flex */
+  flex-direction: column;
+  overflow: hidden; /* Prevent internal scrolling */
+  min-height: 0; /* Crucial for preventing children from overflowing */
+}
+
+.workpage-container {
+  flex-grow: 1; /* Fills available space left by the header */
+  display: flex; /* Use flex if you plan to layout children with flex */
+  flex-direction: column;
+  overflow: visible; /* Prevent internal scrolling */
+  min-height: 0; /* Crucial for preventing children from overflowing */
+}
+
+.workpage-gradient {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(0deg, #ffffff, #ff6a00, #ff49a1);
+  pointer-events: none; /* so it doesn’t block any interactions */
+  z-index: -10;
+}
+
+.motion-wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }

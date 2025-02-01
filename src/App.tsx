@@ -41,9 +41,7 @@ function App() {
       ) : (
         <div className="app-container">
           <Header />
-          <div className="main-container">
-            <MainContent />
-          </div>
+          <MainContent />
         </div>
       )}
     </Router>
@@ -54,7 +52,7 @@ function MainContent() {
   const location = useLocation();
 
   return (
-    <main>
+    <>
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
           <Route
@@ -65,13 +63,14 @@ function MainContent() {
                 initial="initial"
                 animate="animate"
                 exit="exit"
+                className="motion-wrapper"
               >
                 <motion.div
                   variants={contentVariants}
                   initial="initial"
                   animate="animate"
                   exit="exit"
-                  className="page-content"
+                  className="motion-wrapper"
                 >
                   <Homepage />
                 </motion.div>
@@ -88,13 +87,14 @@ function MainContent() {
                 initial="initial"
                 animate="animate"
                 exit="exit"
+                className="motion-wrapper"
               >
                 <motion.div
                   variants={contentVariants}
                   initial="initial"
                   animate="animate"
                   exit="exit"
-                  className="page-content"
+                  className="motion-wrapper"
                 >
                   <CreatorPage />
                 </motion.div>
@@ -109,14 +109,14 @@ function MainContent() {
                 initial="initial"
                 animate="animate"
                 exit="exit"
-                className="page-background"
+                className="motion-wrapper"
               >
                 <motion.div
-                  variants={contentVariants}
-                  initial="initial"
-                  animate="animate"
-                  exit="exit"
-                  className="page-content"
+                  className="workpage-gradient"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.5 }}
                 >
                   <WorksPage />
                 </motion.div>
@@ -131,13 +131,14 @@ function MainContent() {
                 initial="initial"
                 animate="animate"
                 exit="exit"
+                className="motion-wrapper"
               >
                 <motion.div
                   variants={contentVariants}
                   initial="initial"
                   animate="animate"
                   exit="exit"
-                  className="page-content"
+                  className="motion-wrapper"
                 >
                   <ConnectPage />
                 </motion.div>
@@ -152,13 +153,14 @@ function MainContent() {
                 initial="initial"
                 animate="animate"
                 exit="exit"
+                className="motion-wrapper"
               >
                 <motion.div
                   variants={contentVariants}
                   initial="initial"
                   animate="animate"
                   exit="exit"
-                  className="page-content"
+                  className="motion-wrapper"
                 >
                   <Solutions />
                 </motion.div>
@@ -167,7 +169,7 @@ function MainContent() {
           />
         </Routes>
       </AnimatePresence>
-    </main>
+    </>
   );
 }
 
