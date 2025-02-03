@@ -5,8 +5,6 @@
   flex-grow: 1;
   justify-content: center;
   align-items: center;
-  background: #000; /* Optional background color */
-  font-size: 64px; /* Dynamic font size relative to viewport width */
   font-weight: 500; /* Bold text */
   font-family: forma-djr-display, sans-serif;
   line-height: 1;
@@ -22,10 +20,18 @@
 .text-connect {
   max-width: 90%;
   font-style: normal;
+  color: #f7f7f7;
 }
 
-.text-connect p {
-  color: #f7f7f7;
+.large-text {
+  font-size: 6vmin; 
+}
+
+.cta-container {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 4vmin; 
 }
 
 /* Book a Call button */

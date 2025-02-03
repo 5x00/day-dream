@@ -32,6 +32,11 @@ const Connect_Footer = () => {
           </a>
         </div>
         <div className="connect-footer-right">
+          <a
+            className="connect-footer-link"
+          >
+            made in kozhikode
+          </a>
           <p>© 2025 day-dream. all rights reserved.</p>
         </div>
       </div>

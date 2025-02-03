@@ -6,7 +6,7 @@
   padding: 40px 0px;
   font-family: forma-djr-display, sans-serif;
   font-style: normal;
-  font-size: 20px;
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
   background: none;
 }
 

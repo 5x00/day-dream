@@ -42,15 +42,17 @@ function Creator_Title() {
           Math.pow(mouseX - imageX, 2) + Math.pow(mouseY - imageY, 2)
         );
 
-        const proximity = 8000; // Proximity radius
+        const proximity =  8000;
         if (distance < proximity) {
           const angle = Math.atan2(mouseY - imageY, mouseX - imageX);
           const strength = (proximity - distance) / proximity; // Proportional effect strength
 
+          let multiplier = /Mac/i.test(navigator.userAgent) ? 20 : 100;
+
           return {
             ...pos,
-            offsetX: Math.cos(angle) * strength * 100, // Adjust "20" for push intensity
-            offsetY: Math.sin(angle) * strength * 100,
+            offsetX: Math.cos(angle) * strength * multiplier, // Adjust "20" for push intensity
+            offsetY: Math.sin(angle) * strength * multiplier,
           };
         }
         return { ...pos, offsetX: 0, offsetY: 0 }; // Reset offsets if out of range
@@ -81,8 +83,7 @@ function Creator_Title() {
               style={{
                 top: `${top}vh`,
                 left: `${left}vw`,
-                transform: `translate(calc(-50% + ${offsetX}px), calc(-50% + ${offsetY}px))`, // Apply proximity-based translation
-                transition: "transform 0.1s ease", // Smooth animation
+                transform: `translate(calc(-50% + ${offsetX}px), calc(-50% + ${offsetY}px))`
               }}
             />
           );
