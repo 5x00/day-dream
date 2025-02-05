@@ -18,13 +18,14 @@ function Header() {
           ☰
         </button>
         <nav className={`nav ${menuOpen ? "nav-open" : ""}`}>
-          <Link
-            to="/creator"
+          <a
+            href="https://creator.day-dream.studio"
             className="nav-links"
             onClick={() => setMenuOpen(false)}
+            rel="noopener noreferrer"
           >
             creator
-          </Link>
+          </a>
           <Link
             to="/works"
             className="nav-links"

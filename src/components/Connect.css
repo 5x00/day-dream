@@ -24,14 +24,14 @@
 }
 
 .large-text {
-  font-size: 6vmin; 
+  font-size: clamp(3rem, 4vw, 6rem);
 }
 
 .cta-container {
   display: flex;
   align-items: center;
   gap: 20px;
-  font-size: 4vmin; 
+  font-size: clamp(1.5rem, 2.5vw, 3rem);
 }
 
 /* Book a Call button */

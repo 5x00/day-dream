@@ -1,96 +1,129 @@
-/* Outer container that centers the content and fills available space */
+/* Center and size the overall page */
 .solutions-page {
   display: flex;
   flex: 1;
   justify-content: center;
   align-items: center;
-  min-height: 100vh; /* Optional: ensures the page fills the viewport */
+  max-height: 100vh; /* Ensures the page fills the viewport */
 }
 
 /* Main container with flex display and 90% width */
 .solutions-container {
   flex: 1;
   display: flex;
-  max-width: 90%;
-  padding: 10% 0;
-}
-
-/* LEFT SECTION: Vertical arrangement for solution titles */
-.left-section {
-  flex: 1;
-  display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  padding-right: 20px; /* Optional spacing between sections */
+  height: 100%;
+  max-width: 90%;
+  /* Firefox */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.25) transparent;
+  z-index: 0;
 }
 
-/* Each solution item with spacing and hover pointer */
-.solution-item {
-  margin-bottom: 40px;
+/* Style for each nav link (button) */
+.sol-button {
+  font-family: forma-djr-display, sans-serif;
+  font-style: normal;
+  font-size: clamp(0.9rem, 2vw, 1.2rem);
   position: relative;
-}
-
-/* Title text style */
-.solution-title {
-  font-size: 64px;
-  margin: 0;
   font-weight: 500;
-  font-family: forma-djr-display, sans-serif;
-  font-style: normal;
   color: #f7f7f7;
-  transition: transform 0.3s ease;
-}
-
-/* Info text revealed on hover */
-.solution-info {
-  font-size: 40px;
-  margin-top: 8px;
-  font-weight: 400;
-  font-family: forma-djr-display, sans-serif;
-  font-style: normal;
-  color: #f7f7f7;
-  transition: opacity 0.5s ease;
+  text-decoration: none;
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  padding: 0.5em;
   overflow: hidden;
-  white-space: nowrap;
-  display: inline-block;
-  max-width: 0;
-  opacity: 0;
-  transform: translateY(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 1rem; /* Adjust as needed */
+  flex-shrink: 0; /* Prevents the button from shrinking */
+  min-width: 100px;
 }
 
-/* Solutions animations */
-.solution-item.active .solution-title {
-  transform: translateY(-10px);
+/* Create the white box behind the text */
+.sol-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #fff;
+  transform: scaleX(0);
+  transform-origin: right; /* when inactive, it will shrink from the right */
+  transition: transform 0.3s ease;
+  z-index: -1; /* places the box behind the text */
 }
 
-.solution-item.active .solution-info {
-  opacity: 1;
-  transform: translateY(0);
-  animation: typeText 1s steps(40, end) forwards;
+/* Active state: scale the box in from left to right and change text color */
+.sol-button.active {
+  color: #000; /* text becomes black */
+  transition: color 0.3s ease 0.2s;
 }
 
-@keyframes typeText {
-  from {
-    max-width: 0;
-  }
-  to {
-    max-width: 1000px; /* Make sure this is wide enough for your text */
-  }
+.sol-button.active::before {
+  transform: scaleX(1);
+  transform-origin: left; /* scales in from left to right */
+  transition: transform 0.3s ease 0.2s;
 }
 
-/* RIGHT SECTION: Centering the image */
-.right-section {
-  flex: 1;
+/* Hide scrollbar for the nav-links container (WebKit browsers) */
+.sol-button-container {
+  display: flex;
+  flex-wrap: nowrap; /* Prevents wrapping */
+  overflow-x: auto; /* Enables horizontal scrolling */
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+  align-items: center; /* Align buttons vertically */
+  gap: 20px; /* Add spacing between buttons */
+  padding: 20px 0;
+}
+
+/* For Chrome, Safari, and Edge (Chromium-based) */
+.sol-button-container::-webkit-scrollbar {
+  height: 1px;
+}
+
+.sol-button-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sol-button-container::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+.media-div {
+  flex: 1; /* This makes the media-div take up all available space */
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0; /* Ensures the image fills the entire section */
+  background-color: red;
 }
 
-/* Image style: fills the section completely and is centered */
-.solution-image {
+.media-div img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.description-div {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: opacity 0.5s ease;
+  padding: 20px 0;
+  color: #f7f7f7;
+  font-family: forma-djr-display, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: clamp(0.9rem, 2vw, 1.2rem);
+}
+
+@media (max-width: 768px) {
+  .sol-button-container {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
 }

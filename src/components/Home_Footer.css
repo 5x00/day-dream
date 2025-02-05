@@ -22,22 +22,21 @@
 /* Left section: Asterix and text */
 .footer-left {
   display: flex;
-  align-items: center; /* Align asterisk and text vertically */
-  gap: 10px; /* Space between the asterisk and the text */
+  align-items: baseline;
+  gap: 10px;
 }
 
 .asterix {
-  font-size: 40px; /* Large asterisk */
+  font-size: clamp(2rem, 2.5vw, 2.5rem); /* Large asterisk */
   font-weight: 700;
   font-family: forma-djr-display, sans-serif;
   font-style: normal;
   line-height: 1; /* Prevent extra spacing */
   display: flex; /* Ensure consistent alignment in flexbox */
-  align-items: center; /* Vertically center within the flexbox */
 }
 
 .footer-text {
-  font-size: 20px;
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
   line-height: 1;
   letter-spacing: 1px;
   font-family: forma-djr-display, sans-serif;
@@ -50,13 +49,13 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  min-width: 10%;
+  min-width: 20%;
 }
 
 .footer-button {
   background: none; /* No background */
   color: #ffffff; /* White text color */
-  font-size: 32px; /* Large asterisk */
+  font-size: clamp(1.5rem, 2vw, 2rem); /* Large asterisk */
   font-weight: 500;
   font-family: forma-djr-display, sans-serif;
   font-style: normal;

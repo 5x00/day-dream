@@ -1,74 +1,102 @@
+import React, { useState, useEffect, useRef } from "react";
 import "./Solutions_Page.css";
-import { useState } from "react";
 
-type Solution = {
-  id: number;
-  title: string;
-  info: string;
-  image: string;
-};
-
-const solutionsData: Solution[] = [
+const items = [
   {
-    id: 1,
-    title: "Solution 1",
-    info: "Detailed information about Solution 1.",
-    image: "/images/1.jpg",
+    title: "Creative Direction",
+    description:
+      "This is the description for solution 1. It explains many benefits and details about the solution.",
+    media: "https://via.placeholder.com/800x400?text=Solution+1",
   },
   {
-    id: 2,
-    title: "Solution 2",
-    info: "Detailed information about Solution 2.",
-    image: "/images/2.jpg",
+    title: "Bespoke AI Models",
+    description:
+      "Here is solution 2 – offering another set of interesting features and explanations.",
+    media: "https://via.placeholder.com/800x400?text=Solution+2",
   },
   {
-    id: 3,
-    title: "Solution 3",
-    info: "Detailed information about Solution 3.",
-    image: "/images/3.jpg",
+    title: "GenAI Influencers",
+    description:
+      "Solution 3 comes with a unique set of capabilities and an engaging description.",
+    media: "https://via.placeholder.com/800x400?text=Solution+3",
   },
+  {
+    title: "GenAI Generators",
+    description:
+      "Solution 3 comes with a unique set of capabilities and an engaging description.",
+    media: "https://via.placeholder.com/800x400?text=Solution+3",
+  },
+  {
+    title: "CGI Visualizations",
+    description:
+      "Solution 3 comes with a unique set of capabilities and an engaging description.",
+    media: "https://via.placeholder.com/800x400?text=Solution+3",
+  },
+  // Add additional objects as needed.
 ];
 
 function Solutions_Page() {
-  const [hoveredSolution, setHoveredSolution] = useState<number | null>(null);
+  // Keep track of the currently selected item
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  // The description text that is progressively shown via the typing effect
+  const [displayedDescription, setDisplayedDescription] = useState("");
+  // Reference to the interval used for typing animation (so we can clear it)
+  const descriptionIntervalRef = useRef<number | null>(null);
+
+  const [active, setActive] = useState(false);
+
+  const currentItem = items[selectedIndex];
+
+  // Typing animation effect:
+  useEffect(() => {
+    // Clear any previous interval
+    if (descriptionIntervalRef.current) {
+      clearInterval(descriptionIntervalRef.current);
+    }
+    // Start with an empty description
+    setDisplayedDescription("");
+    const fullText = currentItem.description;
+    let currentChar = 0;
+    descriptionIntervalRef.current = setInterval(() => {
+      currentChar++;
+      setDisplayedDescription(fullText.slice(0, currentChar));
+      if (currentChar === fullText.length) {
+        clearInterval(descriptionIntervalRef.current ?? undefined);
+      }
+    }, 10); // Adjust the typing speed (in ms) as desired
+
+    // Cleanup on unmount or if the description changes
+    return () => clearInterval(descriptionIntervalRef.current ?? undefined);
+  }, [selectedIndex, currentItem.description]);
 
   return (
-    <>
-      <div className="solutions-page">
-        <div className="solutions-container">
-          {/* LEFT SECTION: Titles and More Info */}
-          <div className="left-section">
-            {solutionsData.map((solution) => (
-              <div
-                key={solution.id}
-                className={`solution-item ${
-                  hoveredSolution === solution.id ? "active" : ""
-                }`}
-                onMouseEnter={() => setHoveredSolution(solution.id)}
-                onMouseLeave={() => setHoveredSolution(null)}
-              >
-                <h2 className="solution-title">{solution.title}</h2>
-                <div className="solution-info">{solution.info}</div>
-              </div>
-            ))}
-          </div>
-
-          {/* RIGHT SECTION: Image */}
-          <div className="right-section">
-            {hoveredSolution && (
-              <img
-                src={
-                  solutionsData.find((sol) => sol.id === hoveredSolution)
-                    ?.image || ""
-                }
-                alt="Solution"
-                className="solution-image"
-              />
-            )}
-          </div>
+    <div className="solutions-page">
+      <div className="solutions-container">
+        <div className="sol-button-container">
+          {items.map((item, index) => (
+            <a
+              key={index}
+              onClick={() => {
+                setSelectedIndex(index);
+                setActive(!active);
+              }}
+              className={`sol-button ${
+                index === selectedIndex ? "active" : ""
+              }`}
+            >
+              {item.title}
+            </a>
+          ))}
         </div>
+
+        {/* --- Media Div --- */}
+        <div className="media-div">
+          {/* Assuming media is an image */}
+          <img src={currentItem.media} alt={currentItem.title} />
+        </div>
+        <div className="description-div">{displayedDescription}</div>
       </div>
-    </>
+    </div>
   );
 }
 

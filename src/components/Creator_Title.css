@@ -15,6 +15,7 @@
   background-size: cover; /* Ensure the image covers the entire container */
   background-position: center; /* Center the image */
   background-repeat: no-repeat;
+  z-index: -1;
 
   /* Center alignment */
   top: 50%;

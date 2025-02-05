@@ -2,7 +2,7 @@
 .footer {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: end;
   color: #f7f7f7;
   width: 90%;
   font-family: forma-djr-display, sans-serif;
@@ -17,7 +17,7 @@
 
 .text-section p {
   font-weight: 500;
-  font-size: 21px;
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
   font-style: normal;
   letter-spacing: 1px;
 }
@@ -31,7 +31,7 @@
 .nav-link {
   position: relative;
   text-decoration: none;
-  font-size: 24px;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
   font-weight: 500;
   font-family: forma-djr-display, sans-serif;
   font-style: normal;
@@ -60,7 +60,7 @@
 }
 
 .login-container {
-  max-width: 20%;
+  max-width: 40vw;
   width: 100%;
   font-family: forma-djr-display, sans-serif;
 }
@@ -81,14 +81,14 @@
   border-bottom: 2px solid #f7f7f7;
   background: transparent;
   color: #f7f7f7;
-  font-size: 20px;
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
   width: 100%;
   padding: 5px 0;
   outline: none;
 }
 
 .input-container label {
-  font-size: 18px;
+  font-size: clamp(0.8rem, 2.5vw, 1rem);
   color: #f7f7f7;
   position: absolute;
   top: 40px;
@@ -113,4 +113,10 @@
 .login-button:hover {
   background: none; /* No background */
   color: #ff6a00; /* Text color changes to match the gradient */
+}
+
+@media (min-width: 768px) {
+  .login-container {
+    max-width: 20vw; /* Desktop: up to 20% of viewport width */
+  }
 }

@@ -27,35 +27,60 @@ function Creator_Title() {
   });
 
   const [positions, setPositions] = useState(initialPositions);
+  const lerp = (start, end, t) => start + (end - start) * t;
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       const mouseX = e.clientX;
       const mouseY = e.clientY;
 
-      // 4. Loop through every image and update its position based on proximity
       const updatedPositions = positions.map((pos) => {
+        // Calculate the image's center in screen coordinates
         const imageX = (pos.left / 100) * window.innerWidth;
         const imageY = (pos.top / 100) * window.innerHeight;
 
-        const distance = Math.sqrt(
-          Math.pow(mouseX - imageX, 2) + Math.pow(mouseY - imageY, 2)
-        );
+        const dx = mouseX - imageX;
+        const dy = mouseY - imageY;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        const proximity = 5000;
 
-        const proximity =  8000;
+        // Set a lerp factor (0.1 is a common starting point; adjust as needed)
+        const lerpFactor = 0.1;
+
         if (distance < proximity) {
-          const angle = Math.atan2(mouseY - imageY, mouseX - imageX);
-          const strength = (proximity - distance) / proximity; // Proportional effect strength
+          // Calculate the angle and clamped strength
+          const angle = Math.atan2(dy, dx);
+          const rawStrength = (proximity - distance) / proximity;
+          const strength = Math.min(rawStrength, 0.95);
 
-          let multiplier = /Mac/i.test(navigator.userAgent) ? 20 : 100;
+          // Compute the primary offset toward the mouse
+          const primaryX = Math.cos(angle) * strength;
+          const primaryY = Math.sin(angle) * strength;
+
+          // Use a multiplier to adjust overall movement intensity
+          const multiplier = /Mac/i.test(navigator.userAgent) ? 20 : 50;
+          const targetOffsetX = primaryX * multiplier;
+          const targetOffsetY = primaryY * multiplier;
+
+          // Use lerp to smoothly interpolate from the current offset to the target offset
+          const newOffsetX = lerp(pos.offsetX, targetOffsetX, lerpFactor);
+          const newOffsetY = lerp(pos.offsetY, targetOffsetY, lerpFactor);
 
           return {
             ...pos,
-            offsetX: Math.cos(angle) * strength * multiplier, // Adjust "20" for push intensity
-            offsetY: Math.sin(angle) * strength * multiplier,
+            offsetX: newOffsetX,
+            offsetY: newOffsetY,
+          };
+        } else {
+          // When out of range, interpolate back to zero
+          const newOffsetX = lerp(pos.offsetX, 0, lerpFactor);
+          const newOffsetY = lerp(pos.offsetY, 0, lerpFactor);
+          return {
+            ...pos,
+            offsetX: newOffsetX,
+            offsetY: newOffsetY,
           };
         }
-        return { ...pos, offsetX: 0, offsetY: 0 }; // Reset offsets if out of range
       });
 
       setPositions(updatedPositions);
@@ -83,7 +108,7 @@ function Creator_Title() {
               style={{
                 top: `${top}vh`,
                 left: `${left}vw`,
-                transform: `translate(calc(-50% + ${offsetX}px), calc(-50% + ${offsetY}px))`
+                transform: `translate(calc(-50% + ${offsetX}px), calc(-50% + ${offsetY}px))`,
               }}
             />
           );

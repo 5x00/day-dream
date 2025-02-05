@@ -22,9 +22,9 @@ const pageVariants = {
 };
 
 const contentVariants = {
-  initial: { opacity: 0, y: 20 },
+  initial: { opacity: 0, y: 0 },
   animate: { opacity: 1, y: 0, transition: { duration: 0.6, delay: 0.1 } }, // Delayed appearance
-  exit: { opacity: 0, y: -20, transition: { duration: 0.5 } },
+  exit: { opacity: 0, y: 0, transition: { duration: 0.5 } },
 };
 
 function App() {

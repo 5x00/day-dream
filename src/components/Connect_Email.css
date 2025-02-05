@@ -1,0 +1,123 @@
+/* Modal overlay covers the whole viewport */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(8px); /* for Safari */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1001; /* Ensure it is on top */
+}
+
+/* Modal content box */
+.modal-content {
+  background: #fff;
+  padding: 40px;
+  width: 90%;
+  max-width: 500px;
+  position: relative;
+}
+
+.modal-title {
+  font-family: forma-djr-display, sans-serif;
+  font-style: normal;
+  font-size: clamp(1.5rem, 2.5vw, 2.5rem);
+  font-weight: 500;
+  color: #000;
+}
+/* Close button styling */
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+/* Simple styling for form elements */
+.input-group {
+  margin-bottom: 25px;
+  font-family: forma-djr-display, sans-serif;
+  font-style: normal;
+  font-size: clamp(0.8rem, 2.5vw, 1.2rem);
+  font-weight: 500;
+  color: #000;
+}
+
+.input-group label {
+  display: block;
+}
+
+.input-group input,
+.input-group textarea {
+  width: 100%;
+  font-family: forma-djr-display, sans-serif;
+  font-size: clamp(0.8rem, 2.5vw, 1.2rem);
+  font-weight: 500;
+  padding: 8px;
+  box-sizing: border-box;
+  border: none; /* Remove the default border */
+  border-bottom: 2px solid #000; /* Add a black line at the bottom */
+  background: transparent; /* Make background transparent */
+  padding: 8px 4px; /* Add some padding */
+  outline: none;
+}
+
+.input-group textarea {
+  min-height: 100px; /* Set a minimum height */
+  max-height: 300px;
+  overflow-y: auto; /* Enable vertical scroll when content overflows */
+  resize: vertical; /* Allow users to resize vertically if desired */
+  scrollbar-width: thin; /* Makes scrollbar thin */
+  scrollbar-color: #000 transparent;
+}
+
+/* For Chrome, Safari, and Edge (WebKit-based) */
+.input-group textarea::-webkit-scrollbar {
+  width: 8px; /* Width of the vertical scrollbar */
+  height: 8px; /* Height for horizontal scrollbar, if needed */
+}
+
+.input-group textarea::-webkit-scrollbar-track {
+  background: transparent; /* Track background can be transparent or a color */
+}
+
+.input-group textarea::-webkit-scrollbar-thumb {
+  background-color: #000; /* Black scrollbar thumb */
+  border-radius: 4px; /* Rounded corners */
+  border: 2px solid transparent; /* Optional: adds space around thumb */
+}
+
+.input-group ::-webkit-scrollbar-button {
+  display: none;
+}
+
+.button-container {
+  text-align: right;
+}
+
+.send-button {
+  background: none; /* No background */
+  color: #000; /* White text color */
+  font-size: clamp(1.2rem, 2.5vw, 2rem); /* Large asterisk */
+  font-weight: 700;
+  font-family: forma-djr-display, sans-serif;
+  font-style: normal;
+  border: none; /* No border */
+  cursor: pointer; /* Pointer cursor for interactivity */
+  transition: all 0.3s ease; /* Smooth transition for color and hover effect */
+  padding: 0; /* Remove padding */
+  text-decoration: none; /* No underline */
+}
+
+.send-button:hover {
+  background: none; /* No background */
+  color: #ff6a00; /* Text color changes to match the gradient */
+}

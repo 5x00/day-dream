@@ -195,6 +195,57 @@ function Home_Title() {
     }));
   };
 
+  // Touch events
+
+  // Touch handlers (mirror the mouse behavior)
+  const handleTouchStart = () => {
+    // Treat touch start as mouse enter
+    handleMouseEnter();
+  };
+
+  const handleTouchEnd = () => {
+    // Treat touch end as mouse leave
+    handleMouseLeave();
+  };
+
+  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+    if (!lineRef.current) return;
+
+    // Prevent the default behavior to avoid unwanted scrolling
+    e.preventDefault();
+
+    // Use the first touch point
+    const touch = e.touches[0];
+
+    // Get the line's bounding rectangle
+    const rect = lineRef.current.getBoundingClientRect();
+    const cursorX = touch.clientX - rect.left;
+    const lineWidth = rect.width;
+
+    // Calculate the image index (0-9 based on position)
+    const imageIndex = Math.min(Math.floor((cursorX / lineWidth) * 10), 9);
+
+    // Play the click sound if the image index changes
+    if (imageIndex !== lastImageIndex.current) {
+      lastImageIndex.current = imageIndex;
+      if (audioRef.current) {
+        audioRef.current.currentTime = 0;
+        audioRef.current.play();
+      }
+    }
+
+    // Set the image box position and image
+    const boxSize = 450;
+    targetPosition.current = {
+      x: touch.clientX + boxSize / 4,
+      y: touch.clientY - boxSize / 4,
+    };
+    setImageBox((prev) => ({
+      ...prev,
+      imageIndex,
+    }));
+  };
+
   return (
     <div className="home-container">
       <div className="home">
@@ -205,6 +256,9 @@ function Home_Title() {
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
           onMouseMove={handleMouseMove}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+          onTouchMove={handleTouchMove}
         ></div>
         {imageBox.visible && (
           <div
