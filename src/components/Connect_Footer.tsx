@@ -1,4 +1,3 @@
-import React from "react";
 import "./Connect_Footer.css"; // Import the CSS file for styling
 
 const Connect_Footer = () => {
@@ -32,11 +31,7 @@ const Connect_Footer = () => {
           </a>
         </div>
         <div className="connect-footer-right">
-          <a
-            className="connect-footer-link"
-          >
-            made in kozhikode
-          </a>
+          <a className="connect-footer-link">made in kozhikode</a>
           <p>© 2025 day-dream. all rights reserved.</p>
         </div>
       </div>

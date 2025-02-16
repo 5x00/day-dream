@@ -1,4 +1,4 @@
-import React, { FC, FormEvent } from "react";
+import { FC, FormEvent } from "react";
 import "./Connect_Email.css";
 import { motion, AnimatePresence } from "framer-motion";
 

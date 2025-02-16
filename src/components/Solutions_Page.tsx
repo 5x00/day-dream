@@ -1,30 +1,42 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import "./Solutions_Page.css";
 
 const items = [
   {
-    title: "Creative Direction",
+    title: "Art Direction",
     description:
       "This is the description for solution 1. It explains many benefits and details about the solution.",
     media: "https://via.placeholder.com/800x400?text=Solution+1",
   },
   {
-    title: "Bespoke AI Models",
+    title: "GenAI for Influencers",
+    description:
+      "Solution 3 comes with a unique set of capabilities and an engaging description.",
+    media: "https://via.placeholder.com/800x400?text=Solution+3",
+  },
+  {
+    title: "GenAI for Storytelling",
+    description:
+      "Solution 3 comes with a unique set of capabilities and an engaging description.",
+    media: "https://via.placeholder.com/800x400?text=Solution+3",
+  },
+  {
+    title: "GenAI for Fashion",
+    description:
+      "Solution 3 comes with a unique set of capabilities and an engaging description.",
+    media: "https://via.placeholder.com/800x400?text=Solution+3",
+  },
+  {
+    title: "GenAI for Branding",
+    description:
+      "Solution 3 comes with a unique set of capabilities and an engaging description.",
+    media: "https://via.placeholder.com/800x400?text=Solution+3",
+  },
+  {
+    title: "Custom AI Models",
     description:
       "Here is solution 2 – offering another set of interesting features and explanations.",
     media: "https://via.placeholder.com/800x400?text=Solution+2",
-  },
-  {
-    title: "GenAI Influencers",
-    description:
-      "Solution 3 comes with a unique set of capabilities and an engaging description.",
-    media: "https://via.placeholder.com/800x400?text=Solution+3",
-  },
-  {
-    title: "GenAI Generators",
-    description:
-      "Solution 3 comes with a unique set of capabilities and an engaging description.",
-    media: "https://via.placeholder.com/800x400?text=Solution+3",
   },
   {
     title: "CGI Visualizations",

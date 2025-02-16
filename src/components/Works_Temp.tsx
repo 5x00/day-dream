@@ -27,7 +27,9 @@ function Creator_Title() {
   });
 
   const [positions, setPositions] = useState(initialPositions);
-  const lerp = (start, end, t) => start + (end - start) * t;
+  const lerp = (start: number, end: number, t: number): number => {
+    return start + (end - start) * t;
+  };
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
